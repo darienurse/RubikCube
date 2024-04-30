@@ -1,0 +1,136 @@
+<!-- fragment_rubik_cube.xml -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/placeholder_frame_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/row_number_edit_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@color/cardview_dark_background"/>
+
+
+    <Button
+        android:id="@+id/turn_col_up_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="Up"
+        app:layout_constraintBottom_toBottomOf="@+id/column_number_edit_text"
+        app:layout_constraintEnd_toStartOf="@+id/turn_col_down_button"
+        app:layout_constraintStart_toEndOf="@+id/column_number_edit_text" />
+
+    <Button
+        android:id="@+id/turn_col_down_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="Down"
+        app:layout_constraintBottom_toBottomOf="@+id/turn_col_up_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/turn_col_up_button" />
+
+    <EditText
+        android:id="@+id/column_number_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Column #"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/buttons_row_1"
+        app:layout_constraintEnd_toStartOf="@+id/turn_col_up_button"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+        android:id="@+id/turn_row_left_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="Left"
+        app:layout_constraintBottom_toBottomOf="@+id/row_number_edit_text"
+        app:layout_constraintEnd_toStartOf="@+id/turn_row_right_button"
+        app:layout_constraintStart_toEndOf="@+id/row_number_edit_text" />
+
+    <Button
+        android:id="@+id/turn_row_right_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="Right"
+        app:layout_constraintBottom_toBottomOf="@+id/turn_row_left_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/turn_row_left_button" />
+
+    <EditText
+        android:id="@+id/row_number_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Row #"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/column_number_edit_text"
+        app:layout_constraintEnd_toStartOf="@+id/turn_row_left_button"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/buttons_row_1"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/buttons_row_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/yaw_right_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Turn Right" />
+
+
+        <Button
+            android:id="@+id/pitch_up_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Pitch Up" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/buttons_row_2"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/yaw_left_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Turn Left" />
+
+
+        <Button
+            android:id="@+id/pitch_down_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Pitch Down" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/InputSizeFragment">
+
+    <fragment
+        android:id="@+id/InputSizeFragment"
+        android:name="com.darienurse.rubixcube.InputSizeFragment"
+        android:label="@string/size_input_fragment_label"
+        tools:layout="@layout/fragment_input_size">
+
+        <argument
+            android:name="inputNumber"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/action_InputSizeFragment_to_RubikCubeFragment"
+            app:destination="@id/RubikCubeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/RubikCubeFragment"
+        android:name="com.darienurse.rubixcube.RubikCubeFragment"
+        android:label="@string/rubik_cube_fragment_label"
+        tools:layout="@layout/fragment_rubik_cube">
+
+        <action
+            android:id="@+id/action_RubikCubeFragment_to_InputSizeFragment"
+            app:destination="@id/InputSizeFragment" />
+    </fragment>
+</navigation>
