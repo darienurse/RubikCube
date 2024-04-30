@@ -17,6 +17,7 @@ import com.darienurse.rubixcube.model.RubikCube
 import com.darienurse.rubixcube.viewmodel.RubikCubeViewModel
 import com.darienurse.rubixcube.viewmodel.RubikCubeViewModelFactory
 import kotlin.math.min
+import kotlin.properties.Delegates
 
 class RubikCubeFragment : Fragment() {
 
@@ -29,6 +30,7 @@ class RubikCubeFragment : Fragment() {
     private lateinit var turnColUpButton: Button
     private lateinit var turnColDownButton: Button
     private lateinit var rubikGridLayout: GridLayout
+    private var size by Delegates.notNull<Int>()
 
     private val binding get() = _binding!!
 
@@ -36,7 +38,7 @@ class RubikCubeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val size = arguments?.getInt("inputNumber")!!
+        size = arguments?.getInt("inputNumber")!!
         viewModel =
             ViewModelProvider(this, RubikCubeViewModelFactory(size))[RubikCubeViewModel::class.java]
         _binding = FragmentRubikCubeBinding.inflate(inflater, container, false)
@@ -100,28 +102,28 @@ class RubikCubeFragment : Fragment() {
 
         turnColUpButton.setOnClickListener {
             val col = columnNumberEditText.text.toString().toIntOrNull()
-            if (col != null && col in (0 until (viewModel.rubikCube.value?.size ?: 0))) {
+            if (col != null && col in (0 until size)) {
                 viewModel.turnColUp(col)
             }
         }
 
         turnColDownButton.setOnClickListener {
             val col = columnNumberEditText.text.toString().toIntOrNull()
-            if (col != null && col in (0 until (viewModel.rubikCube.value?.size ?: 0))) {
+            if (col != null && col in (0 until size)) {
                 viewModel.turnColDown(col)
             }
         }
 
         turnRowLeftButton.setOnClickListener {
             val row = rowNumberEditText.text.toString().toIntOrNull()
-            if (row != null && row in 0 until (viewModel.rubikCube.value?.size ?: 0)) {
+            if (row != null && row in 0 until size) {
                 viewModel.turnRowToLeft(row)
             }
         }
 
         turnRowRightButton.setOnClickListener {
             val row = rowNumberEditText.text.toString().toIntOrNull()
-            if (row != null && row in 0 until (viewModel.rubikCube.value?.size ?: 0)) {
+            if (row != null && row in 0 until size) {
                 viewModel.turnRowToRight(row)
             }
         }
@@ -132,14 +134,14 @@ class RubikCubeFragment : Fragment() {
 
         rowNumberEditText.addTextChangedListener {
             val row = rowNumberEditText.text.toString().toIntOrNull()
-            val isEnabled = row != null && row in 0 until (viewModel.rubikCube.value?.size ?: 0)
+            val isEnabled = row != null && row in 0 until size
             turnRowLeftButton.isEnabled = isEnabled
             turnRowRightButton.isEnabled = isEnabled
         }
 
         columnNumberEditText.addTextChangedListener {
             val col = columnNumberEditText.text.toString().toIntOrNull()
-            val isEnabled =  col != null && col in (0 until (viewModel.rubikCube.value?.size ?: 0))
+            val isEnabled =  col != null && col in (0 until size)
             turnColUpButton.isEnabled = isEnabled
             turnColDownButton.isEnabled = isEnabled
         }
@@ -147,11 +149,6 @@ class RubikCubeFragment : Fragment() {
 
     private fun updateRubikCubeUI(rubikCube: RubikCube) {
         rubikGridLayout.removeAllViews()
-
-        val size = rubikCube.size
-        rubikGridLayout.rowCount = size
-        rubikGridLayout.columnCount = size
-
         for (i in 0 until size) {
             for (j in 0 until size) {
                 val cell = View(requireContext())
